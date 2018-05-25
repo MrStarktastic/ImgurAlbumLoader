@@ -27,6 +27,10 @@ public class AlbumImageLinksFetcher implements Callback {
         this.listener = listener;
     }
 
+    /**
+     * According to the GET Album Images request description at
+     * https://apidocs.imgur.com Album -> Album Images.
+     */
     public void fetchLinks() {
         final OkHttpClient client = new OkHttpClient();
         final Request request = new Request.Builder()
@@ -50,6 +54,7 @@ public class AlbumImageLinksFetcher implements Callback {
 
         final String responseData = response.body().string();
 
+        // https://api.imgur.com/models/image
         try {
             final JSONArray jsonArrayData = new JSONObject(responseData).getJSONArray("data");
             final int imageCount = jsonArrayData.length();
