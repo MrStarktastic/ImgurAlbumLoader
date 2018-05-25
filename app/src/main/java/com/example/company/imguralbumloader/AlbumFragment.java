@@ -2,6 +2,7 @@ package com.example.company.imguralbumloader;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.bumptech.glide.Glide;
 
@@ -37,12 +37,23 @@ public class AlbumFragment extends Fragment implements View.OnClickListener, Alb
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_album, container, false);
 
-        final Button showAlbumButton = view.findViewById(R.id.show_album_button);
+        final View showAlbumButton = view.findViewById(R.id.show_album_button);
         albumList = view.findViewById(R.id.album_list_view);
         albumList.setHasFixedSize(true);
-        final GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
-                getResources().getInteger(R.integer.grid_column_count));
+
+        final Resources res = getResources();
+        final int gridColumnCount = res.getInteger(R.integer.grid_column_count);
+
+        final GridLayoutManager layoutManager = new GridLayoutManager(getContext(), gridColumnCount);
         albumList.setLayoutManager(layoutManager);
+
+        albumList.addItemDecoration(
+                new GridSpacingItemDecoration(
+                        gridColumnCount,
+                        res.getDimensionPixelSize(R.dimen.grid_spacing),
+                        false
+                )
+        );
 
         if (showAlbumButtonClicked) {
             showAlbumButton.setVisibility(View.GONE);
