@@ -35,7 +35,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     }
 
     static class ImageViewHolder extends RecyclerView.ViewHolder {
-        ImageViewHolder(View itemView) {
+        private ImageViewHolder(View itemView) {
             super(itemView);
         }
 
