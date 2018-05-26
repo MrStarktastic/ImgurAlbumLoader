@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
-
 import com.bumptech.glide.RequestManager;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
@@ -28,7 +26,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        imageLoader.load(imageLinks[position]).transition(withCrossFade()).into(holder.getImageView());
+        imageLoader.load(imageLinks[position]).thumbnail(0.1f).into(holder.getImageView());
     }
 
     @Override
