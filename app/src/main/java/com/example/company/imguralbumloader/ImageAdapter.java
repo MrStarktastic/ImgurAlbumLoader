@@ -28,7 +28,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        imageLoader.load(imageLinks[position]).transition(withCrossFade()).into(holder.imageView);
+        imageLoader.load(imageLinks[position]).transition(withCrossFade()).into(holder.getImageView());
     }
 
     @Override
@@ -37,11 +37,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     }
 
     static class ImageViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imageView;
+        ImageViewHolder(View itemView) {
+            super(itemView);
+        }
 
-        ImageViewHolder(View view) {
-            super(view);
-            this.imageView = (ImageView) view;
+        private ImageView getImageView() {
+            return (ImageView) itemView;
         }
     }
 }
